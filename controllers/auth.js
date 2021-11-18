@@ -40,6 +40,20 @@ class AuthController {
       next(error);
     }
   }
+
+  static async register(req, res, next) {
+    try {
+      const { email, password, firstName, lastName, isDriver } = req.body;
+      const result = await User.create({ email, password, firstName, lastName, isDriver });
+
+      res.status(201).json({
+        message: 'Register successful',
+        email: result.email,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = AuthController;
