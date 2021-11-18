@@ -11,20 +11,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Trip.belongsTo(models.User, {
+        foreignKey: 'UserId',
+      })
+      Trip.belongsTo(models.User, {
+        foreignKey: 'DriverId',
+        as: 'Driver'
+      })
     }
   };
   Trip.init({
     UserId: DataTypes.INTEGER,
     DriverId: DataTypes.INTEGER,
-    pickupLang: DataTypes.STRING,
+    pickupLat: DataTypes.STRING,
     pickupLong: DataTypes.STRING,
     pickupLocation: DataTypes.STRING,
-    destinationLang: DataTypes.STRING,
+    destinationLat: DataTypes.STRING,
     destinationLong: DataTypes.STRING,
     destinationLocation: DataTypes.STRING,
     tripStart: DataTypes.DATE,
     tripEnd: DataTypes.DATE,
-    status: DataTypes.STRING
+    status: DataTypes.STRING,
+    redirectUrl: DataTypes.STRING,
   }, {
     sequelize,
     modelName: 'Trip',

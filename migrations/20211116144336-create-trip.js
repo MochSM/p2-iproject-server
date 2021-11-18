@@ -13,10 +13,9 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       DriverId: {
-        allowNull: false,
         type: Sequelize.INTEGER
       },
-      pickupLang: {
+      pickupLat: {
         allowNull: false,
         type: Sequelize.STRING
       },
@@ -28,7 +27,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING
       },
-      destinationLang: {
+      destinationLat: {
         allowNull: false,
         type: Sequelize.STRING
       },

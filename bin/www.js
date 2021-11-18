@@ -17,10 +17,18 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
     console.log('user disconnected');
   });
-  // check message.
-  socket.on('my message', (msg) => {
-    console.log('message: ' + msg);
-    io.emit('my broadcast', `server: ${msg}`);
+  // KETIKA CUSTOMER SUBMIT NEW TRIP.
+  socket.on('new trip', () => {
+    console.log('listening gak sih');
+    io.emit('fetch trips');
+  });
+  socket.on('update trip', () => {
+    console.log('listening gak sih');
+    io.emit('fetch trips');
+  });
+  // update from driver
+  socket.on('run trip', () => {
+    io.emit('sync running trip');
   });
 });
 
