@@ -73,6 +73,8 @@ class TripController {
       
       if (status === 'accepted' && req.user.isDriver) {
         params['DriverId'] = req.user.id;
+      } else {
+        throw { name: 'onlyDriver' }
       }
 
       if (status === 'done' && req.user.isDriver) {
