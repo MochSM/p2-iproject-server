@@ -20,6 +20,8 @@ const errorHandler = (err, req, res, next) => {
     case 'Exist':
       res.status(409).json({ message: `Trip still running, cancel first to create other one.` });
       break;
+    case 'onlyDriver':
+      res.status(403).json({ message: `Only driver can accept.` });
     default:
       res.status(500).json({ message: `Internal server error` });
       break;
