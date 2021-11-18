@@ -1,6 +1,7 @@
 const { OAuth2Client } = require('google-auth-library');
 const { User } = require('../models');
 const { generateToken } = require('../helpers/jwt');
+const { compare } = require('../helpers/bcrypt');
 
 class AuthController {
   static async googleLogin(req, res, next) {
@@ -51,6 +52,27 @@ class AuthController {
         email: result.email,
       });
     } catch (error) {
+      next(error);
+    }
+  }
+
+  static async login(req, res, next) {
+    try {
+      const { email, password } = req.body;
+      console.log(req.body);
+      const user = await User.findOne({ where: { email } });
+      if (user && password && compare(password, user.password)) {
+        const payload = { id: user.id, email: user.email };
+        const access_token = generateToken(payload);
+        res.status(200).json({
+          message: 'Login successful',
+          access_token,
+          user_id: user.id,
+          user_role: user.role,
+        });
+      } else throw { name: 'Invalid' };
+    } catch (error) {
+      console.log(error);
       next(error);
     }
   }
