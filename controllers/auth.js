@@ -68,7 +68,7 @@ class AuthController {
           message: 'Login successful',
           access_token,
           user_id: user.id,
-          user_role: user.role,
+          is_driver: user.isDriver,
         });
       } else throw { name: 'Invalid' };
     } catch (error) {
